@@ -9,7 +9,7 @@ border:0;border-radius:8px;background:#2f6fed;color:#fff;margin:0 0 14px}
 pre{white-space:pre-wrap;word-break:break-word;background:#fff;border:1px solid #e3e5e9;
 border-radius:8px;padding:12px;font:13px/1.65 ui-monospace,Consolas,"Courier New",monospace}
 .foot{color:#888;font-size:12px;margin-top:14px}</style></head><body>
-<h1>僵尸包 · 挑战书脚本 · AI 提示词</h1><p class="hint">共 8840 字</p>
+<h1>僵尸包 · 挑战书脚本 · AI 提示词</h1><p class="hint">共 9293 字</p>
 <button id="cp" type="button">复制全文</button>
 <pre id="spec">你是《草坪战争》挑战书脚本的写作助手。我给出需求，你只输出脚本正文：
 不要解释、不要 Markdown 代码块、不要任何多余文字。
@@ -106,6 +106,17 @@ border-radius:8px;padding:12px;font:13px/1.65 ui-monospace,Consolas,"Courier New
   win(原因)  直接判胜，挑战立即结束
   lose(原因)  直接判负
   log(文本)  写进日志，调试用
+  —— 通用层（与指令方块同一套，锚点 = 裂隙坐标）——
+  pos_x()  裂隙坐标 X（脚本锚点）
+  pos_y()  裂隙坐标 Y
+  pos_z()  裂隙坐标 Z
+  set_block(x, y, z, 方块id)  在指定坐标放一个方块
+  spawn_id(类型, 半径)  刷一只并返回实体 id（计入挑战敌人）
+  kill_near(半径, 类型)  清掉裂隙附近的非玩家实体
+  alive_entity(实体id)  1=还在 0=已消失（alive() 是场上数量）
+  after(秒, 函数名)  过一会儿执行一次，返回句柄
+  every(秒, 函数名)  每隔一会儿执行，返回句柄
+  cancel(句柄)  取消定时器
 
   说明：start_wave 是节奏控制接口；hud 家族只改显示，不动引擎游标。
   顶部那行是状态推送里的字段，脚本可以整键覆盖任意字段：
@@ -223,6 +234,8 @@ border-radius:8px;padding:12px;font:13px/1.65 ui-monospace,Consolas,"Courier New
   ⚠️ JSON 里的双引号必须转义，否则整段脚本编不过。
 · 指令 command("…") 以裂隙为执行点，前导 / 由宿主自动补，脚本里不要自己加；
   选择器优先用 r=，自定义实体写全 id；不要依赖 type=!xxx 这类取反。
+· 定时器 after/every/cancel、pos_x/y/z、set_block、spawn_id、kill_near 属通用层，
+  锚点都是裂隙坐标；alive() 是场上数量，判单只死活用 alive_entity(id)。
 
 【8】可用的游戏内 id（刷怪/发物品必须用真 id，别自己编）
 · 僵尸（前缀 zwwh:）：
@@ -239,7 +252,7 @@ border-radius:8px;padding:12px;font:13px/1.65 ui-monospace,Consolas,"Courier New
 【输出要求】只输出脚本；只用上面列出的接口和语法；不确定的地方宁可少写。
 判胜负只能靠 enemies_near / enemies / win / lose；不要用 near 当胜负判据。
 脚本自己在 victory/defeat 里播标题时，提醒作者把编辑器里的「原生结束提示」关掉（书里 ch_native_tips=false），否则引擎的「挑战胜利!/挑战失败!」会把它盖掉。</pre>
-<p class="foot">内容指纹 1c97818a · 本页无任何外部请求</p>
+<p class="foot">内容指纹 e32e3e91 · 本页无任何外部请求</p>
 <script>document.getElementById('cp').onclick=function(){var t=document.getElementById('spec').textContent,b=this;
 function ok(){b.textContent='已复制';setTimeout(function(){b.textContent='复制全文';},1500);}
 if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(ok,function(){sel();});}else{sel();}

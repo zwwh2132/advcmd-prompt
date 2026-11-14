@@ -1,23 +1,31 @@
-# advcmd-prompt
+# AI 提示词站点（帽子云）
 
-终极造物主方块（可编程指令方块）的 AI 提示词页面，托管在帽子云。
+两个产品的 Prompt 都放这一个站点，**按产品分区**（2026-11-15 起）：
 
-- 入口文件：`index.html`（自包含，无外部请求）
-- 内容来源：`advcmdblock/behavior_pack_advcmd/AdvCmdScripts/AdvCmdSpec.py` 的 `script_ai_prompt()`
-- 重新生成：`C:\Python27\python.exe -B "Mod开发知识库\结构生成工具\script_prompt_dump.py"`，把产出的 `AI提示词.html` 复制成这里的 `index.html`
+    /                 导航页（三条链接）
+    /advcmd/          终极造物主方块 · 脚本提示词；配方正文在 /advcmd/r/<键>
+    /zombie/script    僵尸包 · 挑战书脚本提示词
+    /zombie/book      僵尸包 · 挑战书 JSON 规范
 
-## 在帽子云接入
+## 真源（改内容只改这三个文件）
 
-1. 登录 https://dash.maoziyun.com （GitHub 一键登录）
-2. 新建应用 → 选 **静态网站 / Static**
-3. 授权一次 GitHub（只读权限即可），选这个仓库，分支 `main`
-4. 构建：无（纯静态），输出目录填 `/`
-5. 部署 → 得到一个 `*.maoziyun.com` 域名
+| 页面 | 真源 |
+|---|---|
+| /advcmd/ | `advcmdblock/behavior_pack_advcmd/AdvCmdScripts/AdvCmdSpec.py`（BUILTINS + MANUAL + RECIPES） |
+| /zombie/script | `…/PVZZombieScripts/ChallengeSystem/ChallengeScriptSpec.py` |
+| /zombie/book | `…/PVZZombieScripts/ChallengeSystem/ChallengeAiDoc.py` 的 `BOOK_SPEC` |
 
-## 验收（改完必跑）
+页面地址与版本号也由包内算：`ChallengeAiDoc.script_url()` / `book_url()`，
+指纹用 32 位 FNV-1a（游戏内没有 hashlib.sha1，包与生成器必须同一算法）。
 
-本地与远端做字节比对，三条都过才算成功：
+## 重新生成
 
-- `HTTP 200`
-- `Content-Type: text/html; charset=utf-8`
-- 远端文件 SHA256 == 本地 `index.html`
+    C:\Python27\python.exe -B "Mod开发知识库\结构生成工具\script_prompt_dump.py"
+
+生成器会打印每条 URL；`/zombie/*` 的版本若与包内算出的不一致，**直接非 0 退出**。
+
+## 发布
+
+    git add -A && git commit -m "update prompt" && git push
+
+帽子云按分支自动构建；构建完再用 HTTP 取一次页面，确认标题/正文是新版（缓存约 20 分钟）。

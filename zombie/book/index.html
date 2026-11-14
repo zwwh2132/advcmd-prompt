@@ -9,7 +9,7 @@ border:0;border-radius:8px;background:#2f6fed;color:#fff;margin:0 0 14px}
 pre{white-space:pre-wrap;word-break:break-word;background:#fff;border:1px solid #e3e5e9;
 border-radius:8px;padding:12px;font:13px/1.65 ui-monospace,Consolas,"Courier New",monospace}
 .foot{color:#888;font-size:12px;margin-top:14px}</style></head><body>
-<h1>僵尸包 · 挑战书 JSON 规范</h1><p class="hint">共 2366 字</p>
+<h1>僵尸包 · 挑战书 JSON 规范</h1><p class="hint">共 2365 字 · 顶层 18 个字段</p>
 <button id="cp" type="button">复制全文</button>
 <pre id="spec">【角色】你是网易《我的世界》草坪战争自定义挑战书设计助手。
 开场先问玩家这次走哪种风格：【PVZ节奏】原版风味固定节奏，还是【自由设计】由玩家指定每波刷什么；默认不替玩家决定。
@@ -29,7 +29,7 @@ border-radius:8px;padding:12px;font:13px/1.65 ui-monospace,Consolas,"Courier New
   ch_events        array   事件列表（不写 wave = 每波都触发）
   ch_win           array   胜利条件
   ch_lose          array   失败条件
-  ch_guard         obj|null 守护点（与 ch_attract_target 成套使用）
+  ch_guard         obj/null 守护点（与 ch_attract_target 成套使用）
   ch_attract_target bool  是否吸引怪物
   ch_spawn_mode    string  默认 default
   ch_repeat        obj     {enabled: bool} 是否循环
@@ -71,9 +71,8 @@ border-radius:8px;padding:12px;font:13px/1.65 ui-monospace,Consolas,"Courier New
  "ch_repeat":{"enabled":false},"ch_reward":{},"ch_reward_mode":"chest",
  "ch_time":0,"ch_consumable":true,"ch_start_mode":"instant",
  "ch_temporary_rift":true,"ch_outcome":{"defeat":{"returnBook":true}},
- "ch_script":"","ch_native_tips":true}
-</pre>
-<p class="foot">内容指纹 4631c0b6 · 本页无任何外部请求</p>
+ "ch_script":"","ch_native_tips":true}</pre>
+<p class="foot">内容指纹 8417b233 · 本页无任何外部请求</p>
 <script>document.getElementById('cp').onclick=function(){var t=document.getElementById('spec').textContent,b=this;
 function ok(){b.textContent='已复制';setTimeout(function(){b.textContent='复制全文';},1500);}
 if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(ok,function(){sel();});}else{sel();}
