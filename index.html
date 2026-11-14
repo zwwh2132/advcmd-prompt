@@ -1,25 +1,15 @@
 <!doctype html>
-<html lang="zh-CN">
-<head>
-<meta charset="utf-8">
+<html lang="zh-CN"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>指令工坊 · 可编程指令方块 · AI 提示词</title>
-<style>
-body{margin:0;padding:16px 14px 40px;background:#f6f7f9;color:#222;
-font:15px/1.7 "Microsoft YaHei",system-ui,-apple-system,sans-serif}
-h1{font-size:17px;margin:0 0 6px}
-.hint{color:#555;font-size:13px;margin:0 0 12px}
-button{font:15px/1 inherit;padding:10px 18px;border:0;border-radius:8px;
-background:#2f6fed;color:#fff;margin:0 0 14px}
-button:active{background:#2559c4}
+<title>指令工坊 · AI 提示词</title>
+<style>body{margin:0;padding:16px 14px 40px;background:#f6f7f9;color:#222;
+font:15px/1.7 "Microsoft YaHei",system-ui,sans-serif}h1{font-size:17px;margin:0 0 6px}
+.hint{color:#555;font-size:13px;margin:0 0 12px}button{font:15px/1 inherit;padding:10px 18px;
+border:0;border-radius:8px;background:#2f6fed;color:#fff;margin:0 0 14px}
 pre{white-space:pre-wrap;word-break:break-word;background:#fff;border:1px solid #e3e5e9;
 border-radius:8px;padding:12px;font:13px/1.65 ui-monospace,Consolas,"Courier New",monospace}
-.foot{color:#888;font-size:12px;margin-top:14px}
-</style>
-</head>
-<body>
-<h1>指令工坊 · 可编程指令方块 · AI 提示词</h1>
-<p class="hint">把下面整段交给 AI 助手，末尾追加你的需求。共 5585 字。</p>
+.foot{color:#888;font-size:12px;margin-top:14px}</style></head><body>
+<h1>指令工坊 · AI 提示词</h1><p class="hint">共 5161 字 · 配方命中关键词时按需打开对应词条</p>
 <button id="cp" type="button">复制全文</button>
 <pre id="spec">你是方块脚本的写作助手。我给出需求，你只输出脚本正文：
 不要解释、不要 Markdown 代码块、不要任何多余文字。
@@ -158,34 +148,25 @@ int spawn_one() {
   ⚠️ JSON 里的双引号**必须转义**，否则整段脚本编不过：
     ["minecraft:shooter", "{\"def\":\"minecraft:small_fireball\"}"]
 · 对象与数据要分清：comp() 返回对象只能 call()；表/列表才用 get() 和下标
-    取主手物品：var it = call(comp(pid, "item"), "GetPlayerItem", [2, 0]); 再 it["itemName"]
-· 读方块：var info = call(comp(0, "block"), "GetBlockNew", [[x, y, z], 维度])
-    维度取事件的 dimensionId；comp(0, "block") 与 comp(0, "game") 第一参随便填
-· 驯服 + 属主（2026-11-14 真机验证）：
-    AddActorComponent("minecraft:is_tamed", "{}"）；call(comp(实体, "owner"), "SetEntityOwner", [玩家id])
-· 跟随主人（字段照抄，没有 priority）：
-    ["minecraft:behavior.follow_owner", "{\"can_teleport\":true,\"speed_multiplier\":1.2,\"start_distance\":10,\"stop_distance\":2}"]
-· 让生物飞（2026-11-14 真机验证：猪能飞）——先删旧的行动组件，再整套换：
-    RemoveActorComponent("minecraft:navigation.walk")、RemoveActorComponent("minecraft:movement.basic")
-    AddActorComponent("minecraft:navigation.fly", "{\"can_path_over_water\":true,\"can_path_from_air\":true}")
-    AddActorComponent("minecraft:movement.fly", "{}"）、AddActorComponent("minecraft:can_fly", "{}"）
-    AddActorComponent("minecraft:flying_speed", "{\"value\":0.25}")（0.25 = 生物当前移速）
 · 指令 command("…") 以方块为执行点；选择器只认 r=，自定义实体写全 id
+
+【5.1】配方词典（**命中关键词就先打开那一条**，按它写；打不开就走【0.1】探测）
+  #fly 让生物飞 —— 关键词：飞、飞行、悬空、飘
+      https://commandprompt-10m3c3qs.maozi.io/r/fly.html?v=81304653
+  #follow 驯服 + 属主 + 跟随 —— 关键词：驯服、认主、宠物、跟随、跟着走
+      https://commandprompt-10m3c3qs.maozi.io/r/follow.html?v=a215a18c
+  #read_block 读方块 / 改方块 —— 关键词：方块、block、读方块、setblock、方块信息
+      https://commandprompt-10m3c3qs.maozi.io/r/read_block.html?v=3498ecca
+  #player_item 取玩家手上 / 背包的物品 —— 关键词：物品、手持、背包、itemDict、给物品
+      https://commandprompt-10m3c3qs.maozi.io/r/player_item.html?v=b57e7610
 
 【6】报错怎么读
 「第 7 行 第 12 列：…」= 那一行那个位置写错了。
 【输出要求】只输出脚本；只用列出的接口和语法。</pre>
-<p class="foot">内容指纹 a08f025c · 本页无任何外部请求，可直接托管</p>
-<script>
-document.getElementById('cp').onclick=function(){
-  var t=document.getElementById('spec').textContent, b=this;
-  function ok(){b.textContent='已复制';setTimeout(function(){b.textContent='复制全文';},1500);}
-  if(navigator.clipboard&&navigator.clipboard.writeText){
-    navigator.clipboard.writeText(t).then(ok,function(){sel();});
-  }else{sel();}
-  function sel(){var r=document.createRange();r.selectNodeContents(document.getElementById('spec'));
-    var s=window.getSelection();s.removeAllRanges();s.addRange(r);b.textContent='已选中，长按复制';}
-};
-</script>
-</body>
-</html>
+<p class="foot">内容指纹 84d01eca · 本页无任何外部请求</p>
+<script>document.getElementById('cp').onclick=function(){var t=document.getElementById('spec').textContent,b=this;
+function ok(){b.textContent='已复制';setTimeout(function(){b.textContent='复制全文';},1500);}
+if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(ok,function(){sel();});}else{sel();}
+function sel(){var r=document.createRange();r.selectNodeContents(document.getElementById('spec'));
+var s=window.getSelection();s.removeAllRanges();s.addRange(r);b.textContent='已选中，长按复制';}};</script>
+</body></html>

@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>配方 · 读方块 / 改方块</title>
+<style>body{margin:0;padding:16px 14px 40px;background:#f6f7f9;color:#222;
+font:15px/1.7 "Microsoft YaHei",system-ui,sans-serif}h1{font-size:17px;margin:0 0 6px}
+.hint{color:#555;font-size:13px;margin:0 0 12px}button{font:15px/1 inherit;padding:10px 18px;
+border:0;border-radius:8px;background:#2f6fed;color:#fff;margin:0 0 14px}
+pre{white-space:pre-wrap;word-break:break-word;background:#fff;border:1px solid #e3e5e9;
+border-radius:8px;padding:12px;font:13px/1.65 ui-monospace,Consolas,"Courier New",monospace}
+.foot{color:#888;font-size:12px;margin-top:14px}</style></head><body>
+<h1>配方 · 读方块 / 改方块</h1><p class="hint">关键词：方块、block、读方块、setblock、方块信息 · 命中就按这里写</p>
+<button id="cp" type="button">复制全文</button>
+<pre id="spec">// 读：var info = call(comp(0, "block"), "GetBlockNew", [[x, y, z], 维度]);
+//     取得 dict，info["name"] 是方块 id；维度取事件的 dimensionId。
+// 写：set_block(x, y, z, "minecraft:air")；也可 command("setblock ...") 但受指令开关限制。
+// comp(0, "block") 与 comp(0, "game") 的第一个参数随便填。</pre>
+<p class="foot">内容指纹 3498ecca · 本页无任何外部请求</p>
+<script>document.getElementById('cp').onclick=function(){var t=document.getElementById('spec').textContent,b=this;
+function ok(){b.textContent='已复制';setTimeout(function(){b.textContent='复制全文';},1500);}
+if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(ok,function(){sel();});}else{sel();}
+function sel(){var r=document.createRange();r.selectNodeContents(document.getElementById('spec'));
+var s=window.getSelection();s.removeAllRanges();s.addRange(r);b.textContent='已选中，长按复制';}};</script>
+</body></html>

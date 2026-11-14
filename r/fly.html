@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>配方 · 让生物飞</title>
+<style>body{margin:0;padding:16px 14px 40px;background:#f6f7f9;color:#222;
+font:15px/1.7 "Microsoft YaHei",system-ui,sans-serif}h1{font-size:17px;margin:0 0 6px}
+.hint{color:#555;font-size:13px;margin:0 0 12px}button{font:15px/1 inherit;padding:10px 18px;
+border:0;border-radius:8px;background:#2f6fed;color:#fff;margin:0 0 14px}
+pre{white-space:pre-wrap;word-break:break-word;background:#fff;border:1px solid #e3e5e9;
+border-radius:8px;padding:12px;font:13px/1.65 ui-monospace,Consolas,"Courier New",monospace}
+.foot{color:#888;font-size:12px;margin-top:14px}</style></head><body>
+<h1>配方 · 让生物飞</h1><p class="hint">关键词：飞、飞行、悬空、飘 · 命中就按这里写</p>
+<button id="cp" type="button">复制全文</button>
+<pre id="spec">2026-11-14 真机验证：照做猪能飞。关键是**先删旧的行动组件**，再整套换。
+call(comp(eid, "event"), "RemoveActorComponent", ["minecraft:navigation.walk"]);
+call(comp(eid, "event"), "RemoveActorComponent", ["minecraft:movement.basic"]);
+call(comp(eid, "event"), "AddActorComponent", ["minecraft:navigation.fly",
+      "{\"can_path_over_water\":true,\"can_path_from_air\":true}"]);
+call(comp(eid, "event"), "AddActorComponent", ["minecraft:movement.fly", "{}"]);
+call(comp(eid, "event"), "AddActorComponent", ["minecraft:can_fly", "{}"]);
+call(comp(eid, "event"), "AddActorComponent", ["minecraft:flying_speed",
+      "{\"value\":0.25}"]);   // 0.25 = 生物当前移速，可用 GetAttrValue(AttrType.SPEED) 取
+注意：这三个接口返回 true 只代表「指令发出」，不代表生效；要人工看一眼行为。</pre>
+<p class="foot">内容指纹 81304653 · 本页无任何外部请求</p>
+<script>document.getElementById('cp').onclick=function(){var t=document.getElementById('spec').textContent,b=this;
+function ok(){b.textContent='已复制';setTimeout(function(){b.textContent='复制全文';},1500);}
+if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(ok,function(){sel();});}else{sel();}
+function sel(){var r=document.createRange();r.selectNodeContents(document.getElementById('spec'));
+var s=window.getSelection();s.removeAllRanges();s.addRange(r);b.textContent='已选中，长按复制';}};</script>
+</body></html>

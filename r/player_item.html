@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>配方 · 取玩家手上 / 背包的物品</title>
+<style>body{margin:0;padding:16px 14px 40px;background:#f6f7f9;color:#222;
+font:15px/1.7 "Microsoft YaHei",system-ui,sans-serif}h1{font-size:17px;margin:0 0 6px}
+.hint{color:#555;font-size:13px;margin:0 0 12px}button{font:15px/1 inherit;padding:10px 18px;
+border:0;border-radius:8px;background:#2f6fed;color:#fff;margin:0 0 14px}
+pre{white-space:pre-wrap;word-break:break-word;background:#fff;border:1px solid #e3e5e9;
+border-radius:8px;padding:12px;font:13px/1.65 ui-monospace,Consolas,"Courier New",monospace}
+.foot{color:#888;font-size:12px;margin-top:14px}</style></head><body>
+<h1>配方 · 取玩家手上 / 背包的物品</h1><p class="hint">关键词：物品、手持、背包、itemDict、给物品 · 命中就按这里写</p>
+<button id="cp" type="button">复制全文</button>
+<pre id="spec">// 主手：var it = call(comp(pid, "item"), "GetPlayerItem", [2, 0]);
+// 物品 id = it["itemName"]，数量 = it["count"]；没有物品时返回 null，先判空。
+// 背包：GetPlayerAllItems(0) 返回列表；give(pid, "minecraft:diamond", 1) 是发物品。</pre>
+<p class="foot">内容指纹 b57e7610 · 本页无任何外部请求</p>
+<script>document.getElementById('cp').onclick=function(){var t=document.getElementById('spec').textContent,b=this;
+function ok(){b.textContent='已复制';setTimeout(function(){b.textContent='复制全文';},1500);}
+if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(ok,function(){sel();});}else{sel();}
+function sel(){var r=document.createRange();r.selectNodeContents(document.getElementById('spec'));
+var s=window.getSelection();s.removeAllRanges();s.addRange(r);b.textContent='已选中，长按复制';}};</script>
+</body></html>
