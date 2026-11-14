@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="zh-CN"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>指令工坊 · AI 提示词</title>
+<title>终极造物主方块 · AI 提示词</title>
 <style>body{margin:0;padding:16px 14px 40px;background:#f6f7f9;color:#222;
 font:15px/1.7 "Microsoft YaHei",system-ui,sans-serif}h1{font-size:17px;margin:0 0 6px}
 .hint{color:#555;font-size:13px;margin:0 0 12px}button{font:15px/1 inherit;padding:10px 18px;
@@ -9,7 +9,7 @@ border:0;border-radius:8px;background:#2f6fed;color:#fff;margin:0 0 14px}
 pre{white-space:pre-wrap;word-break:break-word;background:#fff;border:1px solid #e3e5e9;
 border-radius:8px;padding:12px;font:13px/1.65 ui-monospace,Consolas,"Courier New",monospace}
 .foot{color:#888;font-size:12px;margin-top:14px}</style></head><body>
-<h1>指令工坊 · AI 提示词</h1><p class="hint">共 5324 字 · 配方命中关键词时按需打开对应词条</p>
+<h1>终极造物主方块 · AI 提示词</h1><p class="hint">共 5358 字 · 配方命中关键词时按需打开对应词条</p>
 <button id="cp" type="button">复制全文</button>
 <pre id="spec">你是方块脚本的写作助手。我给出需求，你只输出脚本正文：
 不要解释、不要 Markdown 代码块、不要任何多余文字。
@@ -137,7 +137,7 @@ int spawn_one() {
   listen("事件名", "处理函数名")  订阅引擎事件
   unlisten(事件名)  退订；不带参数=全退
   get(表, "键", 默认值)  取键值，可带默认值
-  command(指令)  以方块为执行点，受存档指令开关影响
+  command(指令)  以方块为执行点，返回是否执行成功；kill/clear 匹配 0 个目标时也为 false（不是写错）
   after(秒, 函数名)  过一会儿执行一次，返回句柄
   every(秒, 函数名)  每隔一会儿执行，返回句柄
   cancel(句柄)  取消定时器
@@ -168,7 +168,7 @@ int spawn_one() {
 · 只给报错没给代码：先要代码（面板【输出】区旁边有「复制」按钮）。
 · 贴回来的代码可能已经被改过，行号会错位：以报错里的关键字为准查找，行号只作参考。
 【输出要求】只输出脚本；只用列出的接口和语法。</pre>
-<p class="foot">内容指纹 5b647f87 · 本页无任何外部请求</p>
+<p class="foot">内容指纹 d6f13573 · 本页无任何外部请求</p>
 <script>document.getElementById('cp').onclick=function(){var t=document.getElementById('spec').textContent,b=this;
 function ok(){b.textContent='已复制';setTimeout(function(){b.textContent='复制全文';},1500);}
 if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(ok,function(){sel();});}else{sel();}

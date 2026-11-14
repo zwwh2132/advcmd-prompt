@@ -9,7 +9,7 @@ border:0;border-radius:8px;background:#2f6fed;color:#fff;margin:0 0 14px}
 pre{white-space:pre-wrap;word-break:break-word;background:#fff;border:1px solid #e3e5e9;
 border-radius:8px;padding:12px;font:13px/1.65 ui-monospace,Consolas,"Courier New",monospace}
 .foot{color:#888;font-size:12px;margin-top:14px}</style></head><body>
-<h1>僵尸包 · 挑战书脚本 · AI 提示词</h1><p class="hint">共 8403 字</p>
+<h1>僵尸包 · 挑战书脚本 · AI 提示词</h1><p class="hint">共 8840 字</p>
 <button id="cp" type="button">复制全文</button>
 <pre id="spec">你是《草坪战争》挑战书脚本的写作助手。我给出需求，你只输出脚本正文：
 不要解释、不要 Markdown 代码块、不要任何多余文字。
@@ -212,9 +212,17 @@ border-radius:8px;padding:12px;font:13px/1.65 ui-monospace,Consolas,"Courier New
   call(attr, "SetAttrValue", [enum("AttrType.HEALTH"), 100]);
   var fx = comp(id, "effect");
   call(fx, "AddEffectToEntity", ["speed", 10, 1, true]);
-组件名：pos / attr / rot / effect / item / block / hurt / name / model / type / game / command / particle / sound
+组件名：pos / attr / rot / effect / item / block / hurt / name / model / type / game / command / particle / sound / explosion / owner …
+  不限于这张表：没列出的组件同样能用，宿主按 Create + 组件名 自动找（2026-11-14 起，两边同一机制）。
 不知道方法叫什么：log(methods(attr)) 打出来看。
 参数写错只会报「第 N 行」并停这一次回调，不会崩游戏。
+
+· 组件拿到的是对象，只能用 call(对象, "方法", [参数]) 调；表与列表才用 get 和下标。
+· 给生物加行为组件（会飞、会射、护主）用 AddActorComponent：第二参是组件名，第三参是它的 JSON
+    call(comp(id, "event"), "AddActorComponent", ["minecraft:shooter", "{\"def\":\"minecraft:small_fireball\"}"])
+  ⚠️ JSON 里的双引号必须转义，否则整段脚本编不过。
+· 指令 command("…") 以裂隙为执行点，前导 / 由宿主自动补，脚本里不要自己加；
+  选择器优先用 r=，自定义实体写全 id；不要依赖 type=!xxx 这类取反。
 
 【8】可用的游戏内 id（刷怪/发物品必须用真 id，别自己编）
 · 僵尸（前缀 zwwh:）：
@@ -231,7 +239,7 @@ border-radius:8px;padding:12px;font:13px/1.65 ui-monospace,Consolas,"Courier New
 【输出要求】只输出脚本；只用上面列出的接口和语法；不确定的地方宁可少写。
 判胜负只能靠 enemies_near / enemies / win / lose；不要用 near 当胜负判据。
 脚本自己在 victory/defeat 里播标题时，提醒作者把编辑器里的「原生结束提示」关掉（书里 ch_native_tips=false），否则引擎的「挑战胜利!/挑战失败!」会把它盖掉。</pre>
-<p class="foot">内容指纹 a423dbfb · 本页无任何外部请求</p>
+<p class="foot">内容指纹 1c97818a · 本页无任何外部请求</p>
 <script>document.getElementById('cp').onclick=function(){var t=document.getElementById('spec').textContent,b=this;
 function ok(){b.textContent='已复制';setTimeout(function(){b.textContent='复制全文';},1500);}
 if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(ok,function(){sel();});}else{sel();}
