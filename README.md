@@ -1,6 +1,6 @@
 # advcmd-prompt
 
-指令工坊（可编程指令方块）的 AI 提示词页面，托管在帽子云。
+终极造物主方块（可编程指令方块）的 AI 提示词页面，托管在帽子云。
 
 - 入口文件：`index.html`（自包含，无外部请求）
 - 内容来源：`advcmdblock/behavior_pack_advcmd/AdvCmdScripts/AdvCmdSpec.py` 的 `script_ai_prompt()`
