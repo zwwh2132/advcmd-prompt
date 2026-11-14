@@ -9,7 +9,7 @@ border:0;border-radius:8px;background:#2f6fed;color:#fff;margin:0 0 14px}
 pre{white-space:pre-wrap;word-break:break-word;background:#fff;border:1px solid #e3e5e9;
 border-radius:8px;padding:12px;font:13px/1.65 ui-monospace,Consolas,"Courier New",monospace}
 .foot{color:#888;font-size:12px;margin-top:14px}</style></head><body>
-<h1>僵尸包 · 挑战书脚本 · AI 提示词</h1><p class="hint">共 9293 字</p>
+<h1>僵尸包 · 挑战书脚本 · AI 提示词</h1><p class="hint">共 11005 字</p>
 <button id="cp" type="button">复制全文</button>
 <pre id="spec">你是《草坪战争》挑战书脚本的写作助手。我给出需求，你只输出脚本正文：
 不要解释、不要 Markdown 代码块、不要任何多余文字。
@@ -60,6 +60,41 @@ border-radius:8px;padding:12px;font:13px/1.65 ui-monospace,Consolas,"Courier New
 · on player_die(string id) { }   挑战中任何玩家死亡（不限距离，书数据那条 60 格条件另算）
 · on victory { }                判胜时（可以在这里补奖励/播报）
 · on defeat { }                 判负时
+· 收引擎事件：listen("事件名", "处理函数名")，处理函数收一张表（与 py 一致）：
+    int on_spawn(table args) { var t = get(args, "engineTypeStr"); }
+  同一个事件可以 listen 多次，几个处理函数都会收到；挑战结束时自动摘掉。
+· 想改事件结果（把事件拦下来），在**处理函数里**调：
+    cancel_event()   取消这个事件 —— 只对参数里带 cancel 的事件有效
+    ret(true)        设置事件的 ret —— 用物品右键方块靠它拦
+  这两个在 on tick / 定时器里写没有意义。
+· 事件名必须一字不差：拼错不报错、只是永远不触发。宿主 listen 时会检查并提示。
+· 常用服务端事件（参数名以官方为准；完整清单查官方事件索引）：
+    AddEntityServerEvent
+      id posX posY posZ dimensionId isBaby engineTypeStr itemName auxValue
+    EntityRemoveEvent
+      id
+    DamageEvent
+      srcId projectileId entityId damage absorption cause knock ignite customTag
+    PlayerDieEvent
+      id attacker customTag cause
+    ProjectileDoHitEffectEvent
+      id hitTargetType targetId hitFace x y z blockPosX blockPosY blockPosZ srcId cancel
+    ServerChatEvent
+      username playerId message cancel bChatById bForbid toPlayerIds gameChatPrefix
+    ServerBlockUseEvent
+      playerId blockName aux cancel x y z clickX clickY clickZ face itemDict dimensionId
+    ServerItemUseOnEvent
+      entityId itemDict x y z blockName blockAuxValue face dimensionId clickX clickY clickZ ret
+    ServerPlayerTryDestroyBlockEvent
+      x y z face fullName auxData playerId dimensionId cancel spawnResources
+    PlayerDoInteractServerEvent
+      playerId itemDict interactEntityId
+    BlockStrengthChangedServerEvent
+      posX posY posZ blockName auxValue newStrength oldStrength dimensionId
+    ExplosionServerEvent
+      blocks victims sourceId explodePos dimensionId
+    AddServerPlayerEvent
+      id isTransfer isReconnect isPeUser transferParam uid proxyId
 
 【3】领域层 · 挑战书自己的接口（只有这些；不在表里的去 第 7 节 用引擎层调）
 
@@ -106,6 +141,8 @@ border-radius:8px;padding:12px;font:13px/1.65 ui-monospace,Consolas,"Courier New
   win(原因)  直接判胜，挑战立即结束
   lose(原因)  直接判负
   log(文本)  写进日志，调试用
+  cancel_event()  处理函数里：请求取消这个事件（参数里带 cancel 的才生效）
+  ret(true/false)  处理函数里：设置事件的 ret（用物品右键方块要 ret(true) 才拦得住）
   —— 通用层（与指令方块同一套，锚点 = 裂隙坐标）——
   pos_x()  裂隙坐标 X（脚本锚点）
   pos_y()  裂隙坐标 Y
@@ -252,7 +289,7 @@ border-radius:8px;padding:12px;font:13px/1.65 ui-monospace,Consolas,"Courier New
 【输出要求】只输出脚本；只用上面列出的接口和语法；不确定的地方宁可少写。
 判胜负只能靠 enemies_near / enemies / win / lose；不要用 near 当胜负判据。
 脚本自己在 victory/defeat 里播标题时，提醒作者把编辑器里的「原生结束提示」关掉（书里 ch_native_tips=false），否则引擎的「挑战胜利!/挑战失败!」会把它盖掉。</pre>
-<p class="foot">内容指纹 e32e3e91 · 本页无任何外部请求</p>
+<p class="foot">内容指纹 906e4120 · 本页无任何外部请求</p>
 <script>document.getElementById('cp').onclick=function(){var t=document.getElementById('spec').textContent,b=this;
 function ok(){b.textContent='已复制';setTimeout(function(){b.textContent='复制全文';},1500);}
 if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(ok,function(){sel();});}else{sel();}
