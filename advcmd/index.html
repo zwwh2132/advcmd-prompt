@@ -9,7 +9,7 @@ border:0;border-radius:8px;background:#2f6fed;color:#fff;margin:0 0 14px}
 pre{white-space:pre-wrap;word-break:break-word;background:#fff;border:1px solid #e3e5e9;
 border-radius:8px;padding:12px;font:13px/1.65 ui-monospace,Consolas,"Courier New",monospace}
 .foot{color:#888;font-size:12px;margin-top:14px}</style></head><body>
-<h1>终极造物主方块 · AI 提示词</h1><p class="hint">共 6454 字 · 配方命中关键词时按需打开对应词条</p>
+<h1>终极造物主方块 · AI 提示词</h1><p class="hint">共 6565 字 · 配方命中关键词时按需打开对应词条</p>
 <button id="cp" type="button">复制全文</button>
 <pre id="spec">你是方块脚本的写作助手。我给出需求，你只输出脚本正文：
 不要解释、不要 Markdown 代码块、不要任何多余文字。
@@ -53,7 +53,8 @@ border-radius:8px;padding:12px;font:13px/1.65 ui-monospace,Consolas,"Courier New
   表 set(t,k,v) has(t,k) del(t,k) keys(t)；列表 push pop set_at remove_at index_of
 【2】事件
 · on start / on run / on tick(n) / on stop：方块自己的四个时机；
-  同一种 on 只能写一次（写两个 on tick 会被后者覆盖）。
+  同一个事件可以写多个 on 块：按书写顺序依次执行；on tick 的间隔以第一个为准；
+  某个块里 return 只结束它自己，后面的照常执行。
 · 定时器：after(秒,函数名) / every(秒,函数名) / cancel(句柄)；函数名写成字符串。
 · 收引擎事件：listen("事件名", "处理函数名")，处理函数收一张表（与 py 一致）：
     int on_use(table args) { var x = get(args, "x"); }
@@ -62,6 +63,7 @@ border-radius:8px;padding:12px;font:13px/1.65 ui-monospace,Consolas,"Courier New
     cancel_event()   取消这个事件 —— 只对参数里带 cancel 的事件有效
     ret(true)        设置事件的 ret —— 用物品右键方块（ServerItemUseOnEvent）靠它拦
   这两个在 on tick / 定时器里写没有意义。
+  也可以直接改参数表（等价写法）：set(args, "cancel", true) / set(args, "ret", true)。
 · 事件名必须一字不差：拼错不报错、只是永远不触发。宿主在 listen 时会检查，
   不认识就写一行提示到输出区；若是别的模组的自定义事件，忽略这条提示。
 · 常用服务端事件（参数名以官方为准；完整清单查官方事件索引）：
@@ -194,7 +196,7 @@ int spawn_one() {
 · 只给报错没给代码：先要代码（面板【输出】区旁边有「复制」按钮）。
 · 贴回来的代码可能已经被改过，行号会错位：以报错里的关键字为准查找，行号只作参考。
 【输出要求】只输出脚本；只用列出的接口和语法。</pre>
-<p class="foot">内容指纹 3874685d · 本页无任何外部请求</p>
+<p class="foot">内容指纹 fb386c51 · 本页无任何外部请求</p>
 <script>document.getElementById('cp').onclick=function(){var t=document.getElementById('spec').textContent,b=this;
 function ok(){b.textContent='已复制';setTimeout(function(){b.textContent='复制全文';},1500);}
 if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(ok,function(){sel();});}else{sel();}
