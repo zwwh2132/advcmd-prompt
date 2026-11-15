@@ -9,7 +9,7 @@ border:0;border-radius:8px;background:#2f6fed;color:#fff;margin:0 0 14px}
 pre{white-space:pre-wrap;word-break:break-word;background:#fff;border:1px solid #e3e5e9;
 border-radius:8px;padding:12px;font:13px/1.65 ui-monospace,Consolas,"Courier New",monospace}
 .foot{color:#888;font-size:12px;margin-top:14px}</style></head><body>
-<h1>终极造物主方块 · AI 提示词</h1><p class="hint">共 6565 字 · 配方命中关键词时按需打开对应词条</p>
+<h1>终极造物主方块 · AI 提示词</h1><p class="hint">共 6728 字 · 配方命中关键词时按需打开对应词条</p>
 <button id="cp" type="button">复制全文</button>
 <pre id="spec">你是方块脚本的写作助手。我给出需求，你只输出脚本正文：
 不要解释、不要 Markdown 代码块、不要任何多余文字。
@@ -59,6 +59,10 @@ border-radius:8px;padding:12px;font:13px/1.65 ui-monospace,Consolas,"Courier New
 · 收引擎事件：listen("事件名", "处理函数名")，处理函数收一张表（与 py 一致）：
     int on_use(table args) { var x = get(args, "x"); }
   同一个事件可以 listen 多次，几个处理函数都会收到。
+  第三个参数是优先级（0~10，默认 0，越大越先执行）：
+    listen("ServerBlockUseEvent", "on_use", 8);
+  它管的是「你的处理函数和其它监听者（宿主、别的模组）谁先跑」；
+  脚本内部多个 on 块之间仍按书写顺序。
 · 想改事件结果（把事件拦下来），在**事件处理函数里**调：
     cancel_event()   取消这个事件 —— 只对参数里带 cancel 的事件有效
     ret(true)        设置事件的 ret —— 用物品右键方块（ServerItemUseOnEvent）靠它拦
@@ -160,7 +164,7 @@ int spawn_one() {
   methods(对象)  列出可调方法
   enum("AttrType.HEALTH")  取引擎枚举
   sys(命名空间, 系统名)  拿系统对象
-  listen("事件名", "处理函数名")  订阅引擎事件
+  listen("事件名", "处理函数名", 优先级)  订阅引擎事件；优先级 0~10，越大越先执行（默认 0）
   unlisten(事件名)  退订；不带参数=全退
   get(表, "键", 默认值)  取键值，可带默认值
   command(指令)  以方块为执行点，返回是否执行成功；kill/clear 匹配 0 个目标时也为 false（不是写错）
@@ -196,7 +200,7 @@ int spawn_one() {
 · 只给报错没给代码：先要代码（面板【输出】区旁边有「复制」按钮）。
 · 贴回来的代码可能已经被改过，行号会错位：以报错里的关键字为准查找，行号只作参考。
 【输出要求】只输出脚本；只用列出的接口和语法。</pre>
-<p class="foot">内容指纹 fb386c51 · 本页无任何外部请求</p>
+<p class="foot">内容指纹 c7f9d62e · 本页无任何外部请求</p>
 <script>document.getElementById('cp').onclick=function(){var t=document.getElementById('spec').textContent,b=this;
 function ok(){b.textContent='已复制';setTimeout(function(){b.textContent='复制全文';},1500);}
 if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(ok,function(){sel();});}else{sel();}
