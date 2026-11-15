@@ -181,7 +181,7 @@ int spawn_one() {
   listen("事件名", "处理函数名", 优先级)  订阅引擎事件；优先级 0~10，越大越先执行（默认 0）
   unlisten(事件名)  退订；不带参数=全退
   get(表, "键", 默认值)  取键值，可带默认值
-  command(指令)  以方块为执行点，返回是否执行成功；kill/clear 匹配 0 个目标时也为 false（不是写错）
+  command(指令)  以方块为执行点执行（不带斜杠）；返回值不可信（引擎这版恒为 false），判效果请自己查方块/看聊天栏
   after(秒, 函数名)  过一会儿执行一次，返回句柄
   every(秒, 函数名)  每隔一会儿执行，返回句柄
   cancel(句柄)  取消定时器
@@ -214,7 +214,7 @@ int spawn_one() {
 · 只给报错没给代码：先要代码（面板【输出】区旁边有「复制」按钮）。
 · 贴回来的代码可能已经被改过，行号会错位：以报错里的关键字为准查找，行号只作参考。
 【输出要求】只输出脚本；只用列出的接口和语法。</pre>
-<p class="foot">内容指纹 081c0c19 · 本页无任何外部请求</p>
+<p class="foot">内容指纹 a162925a · 本页无任何外部请求</p>
 <script>document.getElementById('cp').onclick=function(){var t=document.getElementById('spec').textContent,b=this;
 function ok(){b.textContent='已复制';setTimeout(function(){b.textContent='复制全文';},1500);}
 if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(ok,function(){sel();});}else{sel();}
