@@ -9,7 +9,7 @@ border:0;border-radius:8px;background:#2f6fed;color:#fff;margin:0 0 14px}
 pre{white-space:pre-wrap;word-break:break-word;background:#fff;border:1px solid #e3e5e9;
 border-radius:8px;padding:12px;font:13px/1.65 ui-monospace,Consolas,"Courier New",monospace}
 .foot{color:#888;font-size:12px;margin-top:14px}</style></head><body>
-<h1>终极造物主方块 · AI 提示词</h1><p class="hint">共 6728 字 · 配方命中关键词时按需打开对应词条</p>
+<h1>终极造物主方块 · AI 提示词</h1><p class="hint">共 7063 字 · 配方命中关键词时按需打开对应词条</p>
 <button id="cp" type="button">复制全文</button>
 <pre id="spec">你是方块脚本的写作助手。我给出需求，你只输出脚本正文：
 不要解释、不要 Markdown 代码块、不要任何多余文字。
@@ -63,6 +63,11 @@ border-radius:8px;padding:12px;font:13px/1.65 ui-monospace,Consolas,"Courier New
     listen("ServerBlockUseEvent", "on_use", 8);
   它管的是「你的处理函数和其它监听者（宿主、别的模组）谁先跑」；
   脚本内部多个 on 块之间仍按书写顺序。
+· 想「不管方块在不在加载范围都一直跑」：直接监听服务端 tick 事件，不用别的机制——
+    listen("OnScriptTickServer", "on_frame");      // 服务端每 tick 一次，1 秒 30 次
+  它和 on tick(n) 不是一套时基：on tick(n) 按 20 拍/秒算，这个事件是 30 次/秒；
+  要「每秒做一次」就在里面自己数（每 30 次执行一次），别拿 n=30 套到 on tick 上。
+  代价：方块不加载时也会被调用 —— 别在里面遍历实体/刷方块，要么自己降频。
 · 想改事件结果（把事件拦下来），在**事件处理函数里**调：
     cancel_event()   取消这个事件 —— 只对参数里带 cancel 的事件有效
     ret(true)        设置事件的 ret —— 用物品右键方块（ServerItemUseOnEvent）靠它拦
@@ -97,6 +102,8 @@ border-radius:8px;padding:12px;font:13px/1.65 ui-monospace,Consolas,"Courier New
       blocks victims sourceId explodePos dimensionId
     AddServerPlayerEvent
       id isTransfer isReconnect isPeUser transferParam uid proxyId
+    OnScriptTickServer
+      无参数（服务端每 tick 一次，1 秒 30 次；与区块无关）
 
 【3】两个完整例子（照这个结构和风格写）
 例 1：每 60 秒提醒一次，5 秒后清掉方块 60 格内的掉落物
@@ -200,7 +207,7 @@ int spawn_one() {
 · 只给报错没给代码：先要代码（面板【输出】区旁边有「复制」按钮）。
 · 贴回来的代码可能已经被改过，行号会错位：以报错里的关键字为准查找，行号只作参考。
 【输出要求】只输出脚本；只用列出的接口和语法。</pre>
-<p class="foot">内容指纹 c7f9d62e · 本页无任何外部请求</p>
+<p class="foot">内容指纹 4ad8cdee · 本页无任何外部请求</p>
 <script>document.getElementById('cp').onclick=function(){var t=document.getElementById('spec').textContent,b=this;
 function ok(){b.textContent='已复制';setTimeout(function(){b.textContent='复制全文';},1500);}
 if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(ok,function(){sel();});}else{sel();}

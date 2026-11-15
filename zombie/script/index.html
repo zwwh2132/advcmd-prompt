@@ -9,7 +9,7 @@ border:0;border-radius:8px;background:#2f6fed;color:#fff;margin:0 0 14px}
 pre{white-space:pre-wrap;word-break:break-word;background:#fff;border:1px solid #e3e5e9;
 border-radius:8px;padding:12px;font:13px/1.65 ui-monospace,Consolas,"Courier New",monospace}
 .foot{color:#888;font-size:12px;margin-top:14px}</style></head><body>
-<h1>僵尸包 · 挑战书脚本 · AI 提示词</h1><p class="hint">共 11276 字</p>
+<h1>僵尸包 · 挑战书脚本 · AI 提示词</h1><p class="hint">共 11546 字</p>
 <button id="cp" type="button">复制全文</button>
 <pre id="spec">你是《草坪战争》挑战书脚本的写作助手。我给出需求，你只输出脚本正文：
 不要解释、不要 Markdown 代码块、不要任何多余文字。
@@ -65,6 +65,10 @@ border-radius:8px;padding:12px;font:13px/1.65 ui-monospace,Consolas,"Courier New
   同一个事件可以 listen 多次，几个处理函数都会收到；挑战结束时自动摘掉。
   第三个参数是优先级（0~10，默认 0，越大越先执行）：listen("DamageEvent", "on_hit", 8)；
   它管的是「你的处理函数和其它监听者（宿主、别的模组）谁先跑」。
+· 想「不受区块加载影响、一直跑」：直接监听服务端 tick 事件，不用别的机制——
+    listen("OnScriptTickServer", "on_frame");      // 服务端每 tick 一次，1 秒 30 次
+  与 on tick(n) 不是一套时基（on tick(n) 按 20 拍/秒）；要每秒一次就自己数 30 次。
+  代价：每拍都会进脚本，别在里面遍历实体，要么自己降频。
 · 同一个事件也可以写多个 on 块（如两个 on tick）：按书写顺序依次执行，
   on tick 的间隔以第一个为准；某块 return 只结束它自己。
 · 想改事件结果（把事件拦下来），在**处理函数里**调：
@@ -100,6 +104,8 @@ border-radius:8px;padding:12px;font:13px/1.65 ui-monospace,Consolas,"Courier New
       blocks victims sourceId explodePos dimensionId
     AddServerPlayerEvent
       id isTransfer isReconnect isPeUser transferParam uid proxyId
+    OnScriptTickServer
+      无参数（服务端每 tick 一次，1 秒 30 次；与区块无关）
 
 【3】领域层 · 挑战书自己的接口（只有这些；不在表里的去 第 7 节 用引擎层调）
 
@@ -294,7 +300,7 @@ border-radius:8px;padding:12px;font:13px/1.65 ui-monospace,Consolas,"Courier New
 【输出要求】只输出脚本；只用上面列出的接口和语法；不确定的地方宁可少写。
 判胜负只能靠 enemies_near / enemies / win / lose；不要用 near 当胜负判据。
 脚本自己在 victory/defeat 里播标题时，提醒作者把编辑器里的「原生结束提示」关掉（书里 ch_native_tips=false），否则引擎的「挑战胜利!/挑战失败!」会把它盖掉。</pre>
-<p class="foot">内容指纹 83ebc529 · 本页无任何外部请求</p>
+<p class="foot">内容指纹 01c4c196 · 本页无任何外部请求</p>
 <script>document.getElementById('cp').onclick=function(){var t=document.getElementById('spec').textContent,b=this;
 function ok(){b.textContent='已复制';setTimeout(function(){b.textContent='复制全文';},1500);}
 if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(ok,function(){sel();});}else{sel();}
