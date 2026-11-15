@@ -9,7 +9,7 @@ border:0;border-radius:8px;background:#2f6fed;color:#fff;margin:0 0 14px}
 pre{white-space:pre-wrap;word-break:break-word;background:#fff;border:1px solid #e3e5e9;
 border-radius:8px;padding:12px;font:13px/1.65 ui-monospace,Consolas,"Courier New",monospace}
 .foot{color:#888;font-size:12px;margin-top:14px}</style></head><body>
-<h1>终极造物主方块 · AI 提示词</h1><p class="hint">共 7063 字 · 配方命中关键词时按需打开对应词条</p>
+<h1>终极造物主方块 · AI 提示词</h1><p class="hint">共 7352 字 · 配方命中关键词时按需打开对应词条</p>
 <button id="cp" type="button">复制全文</button>
 <pre id="spec">你是方块脚本的写作助手。我给出需求，你只输出脚本正文：
 不要解释、不要 Markdown 代码块、不要任何多余文字。
@@ -52,7 +52,10 @@ border-radius:8px;padding:12px;font:13px/1.65 ui-monospace,Consolas,"Courier New
   abs() min() max() clamp(值,小,大) floor() ceil() round()
   表 set(t,k,v) has(t,k) del(t,k) keys(t)；列表 push pop set_at remove_at index_of
 【2】事件
-· on start / on run / on tick(n) / on stop：方块自己的四个时机；
+· on start / on run / on tick(n) / on pause / on resume / on stop：六个时机；
+  start = 第一次开始跑；run = 开始后紧接着跑一次；tick(n) = 每 n 拍一次；
+  pause = 红石断电，脚本被冻结（定时器与变量原样保留，不销毁）；
+  resume = 重新通电，从断点继续；stop = 脚本被销毁（拆方块 / 换脚本），清东西写这里。
   同一个事件可以写多个 on 块：按书写顺序依次执行；on tick 的间隔以第一个为准；
   某个块里 return 只结束它自己，后面的照常执行。
 · 定时器：after(秒,函数名) / every(秒,函数名) / cancel(句柄)；函数名写成字符串。
@@ -120,7 +123,7 @@ int clean() {
     return 1;
 }
 
-例 2：通电后每 3 秒刷一只僵尸，场上最多 5 只；断电时清干净
+例 2：通电后每 3 秒刷一只僵尸，场上最多 5 只；断电（冻结）时清干净，再通电接着刷
 var ids = [];
 var h = 0;
 
@@ -130,11 +133,15 @@ on run {
     h = every(3, "spawn_one");
 }
 
-on stop {
-    cancel(h);
+on pause {
+    cancel(h);            // 断电 = 冻结：停掉刷怪，把已经刷出来的清干净
     h = 0;
     for (var i = 0; i &lt; len(ids); i++) { kill(ids[i]); }
     ids = [];
+}
+
+on resume {
+    h = every(3, "spawn_one");    // 通电 = 从断点继续：把暂停时停掉的定时器接回来
 }
 
 int spawn_one() {
@@ -197,7 +204,7 @@ int spawn_one() {
   #follow 驯服 + 属主 + 跟随 —— 关键词：驯服、认主、宠物、跟随、跟着走
       https://commandprompt-10m3c3qs.maozi.io/advcmd/r/follow?v=a31ecf85
   #read_block 读方块 / 改方块 —— 关键词：方块、block、读方块、setblock、方块信息
-      https://commandprompt-10m3c3qs.maozi.io/advcmd/r/read_block?v=ba8ea1b7
+      https://commandprompt-10m3c3qs.maozi.io/advcmd/r/read_block?v=d9d1a730
   #player_item 取玩家手上 / 背包的物品 —— 关键词：物品、手持、背包、itemDict、给物品
       https://commandprompt-10m3c3qs.maozi.io/advcmd/r/player_item?v=006aa320
 
@@ -207,7 +214,7 @@ int spawn_one() {
 · 只给报错没给代码：先要代码（面板【输出】区旁边有「复制」按钮）。
 · 贴回来的代码可能已经被改过，行号会错位：以报错里的关键字为准查找，行号只作参考。
 【输出要求】只输出脚本；只用列出的接口和语法。</pre>
-<p class="foot">内容指纹 4ad8cdee · 本页无任何外部请求</p>
+<p class="foot">内容指纹 081c0c19 · 本页无任何外部请求</p>
 <script>document.getElementById('cp').onclick=function(){var t=document.getElementById('spec').textContent,b=this;
 function ok(){b.textContent='已复制';setTimeout(function(){b.textContent='复制全文';},1500);}
 if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(ok,function(){sel();});}else{sel();}

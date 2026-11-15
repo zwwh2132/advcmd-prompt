@@ -14,8 +14,9 @@ border-radius:8px;padding:12px;font:13px/1.65 ui-monospace,Consolas,"Courier New
 <pre id="spec">// 读：var info = call(comp(0, "block"), "GetBlockNew", [[x, y, z], 维度]);
 //     取得 dict，info["name"] 是方块 id；维度取事件的 dimensionId。
 // 写：set_block(x, y, z, "minecraft:air")；也可 command("setblock ...") 但受指令开关限制。
-// comp(0, "block") 与 comp(0, "game") 的第一个参数随便填。</pre>
-<p class="foot">内容指纹 ba8ea1b7 · 本页无任何外部请求</p>
+// comp 的第一个参数 = 用谁的身份构造：读方块传 null；要调 PlayerDestroyBlock 这类
+// 「破坏归属于谁」的方法，必须传玩家 id，例：comp(pid, "block")。</pre>
+<p class="foot">内容指纹 d9d1a730 · 本页无任何外部请求</p>
 <script>document.getElementById('cp').onclick=function(){var t=document.getElementById('spec').textContent,b=this;
 function ok(){b.textContent='已复制';setTimeout(function(){b.textContent='复制全文';},1500);}
 if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(ok,function(){sel();});}else{sel();}
