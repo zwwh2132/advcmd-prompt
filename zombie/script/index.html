@@ -9,7 +9,7 @@ border:0;border-radius:8px;background:#2f6fed;color:#fff;margin:0 0 14px}
 pre{white-space:pre-wrap;word-break:break-word;background:#fff;border:1px solid #e3e5e9;
 border-radius:8px;padding:12px;font:13px/1.65 ui-monospace,Consolas,"Courier New",monospace}
 .foot{color:#888;font-size:12px;margin-top:14px}</style></head><body>
-<h1>僵尸包 · 挑战书脚本 · AI 提示词</h1><p class="hint">共 11769 字</p>
+<h1>僵尸包 · 挑战书脚本 · AI 提示词</h1><p class="hint">共 11768 字</p>
 <button id="cp" type="button">复制全文</button>
 <pre id="spec">你是《草坪战争》挑战书脚本的写作助手。我给出需求，你只输出脚本正文：
 不要解释、不要 Markdown 代码块、不要任何多余文字。
@@ -154,7 +154,7 @@ border-radius:8px;padding:12px;font:13px/1.65 ui-monospace,Consolas,"Courier New
   log(文本)  只写进后台日志，**玩家看不见**；要给玩家看请用 say() / title()
   cancel_event()  处理函数里：请求取消这个事件（参数里带 cancel 的才生效）
   ret(true/false)  处理函数里：设置事件的 ret（用物品右键方块要 ret(true) 才拦得住）
-  —— 通用层（与指令方块同一套，锚点 = 裂隙坐标）——
+  —— 通用层（与挑战规则无关，锚点 = 裂隙坐标）——
   pos_x()  裂隙坐标 X（脚本锚点）
   pos_y()  裂隙坐标 Y
   pos_z()  裂隙坐标 Z
@@ -304,7 +304,7 @@ border-radius:8px;padding:12px;font:13px/1.65 ui-monospace,Consolas,"Courier New
 玩家看不见 log()：需要给玩家反馈时一律用 say() / title()。
 判胜负只能靠 enemies_near / enemies / win / lose；不要用 near 当胜负判据。
 脚本自己在 victory/defeat 里播标题时，提醒作者把编辑器里的「原生结束提示」关掉（书里 ch_native_tips=false），否则引擎的「挑战胜利!/挑战失败!」会把它盖掉。</pre>
-<p class="foot">内容指纹 e9027700 · 本页无任何外部请求</p>
+<p class="foot">内容指纹 17addfbe · 本页无任何外部请求</p>
 <script>document.getElementById('cp').onclick=function(){var t=document.getElementById('spec').textContent,b=this;
 function ok(){b.textContent='已复制';setTimeout(function(){b.textContent='复制全文';},1500);}
 if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(ok,function(){sel();});}else{sel();}
