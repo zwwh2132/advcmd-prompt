@@ -9,7 +9,7 @@ border:0;border-radius:8px;background:#2f6fed;color:#fff;margin:0 0 14px}
 pre{white-space:pre-wrap;word-break:break-word;background:#fff;border:1px solid #e3e5e9;
 border-radius:8px;padding:12px;font:13px/1.65 ui-monospace,Consolas,"Courier New",monospace}
 .foot{color:#888;font-size:12px;margin-top:14px}</style></head><body>
-<h1>终极造物主方块 · AI 提示词</h1><p class="hint">共 8726 字 · 配方命中关键词时按需打开对应词条</p>
+<h1>终极造物主方块 · AI 提示词</h1><p class="hint">共 8950 字 · 配方命中关键词时按需打开对应词条</p>
 <button id="cp" type="button">复制全文</button>
 <pre id="spec">你是方块脚本的写作助手。我给出需求，你只输出脚本正文：
 不要解释、不要 Markdown 代码块、不要任何多余文字。
@@ -31,6 +31,12 @@ border-radius:8px;padding:12px;font:13px/1.65 ui-monospace,Consolas,"Courier New
 · 玩家**先发提示词、再发需求**（两条消息）：第一轮没有需求，出卡 + 问一句，是正常流程。
 · 思考与工具结果不进下一轮上下文 —— 所以只有写进正文的才算数，卡就是为此存在。
 · 被要求复述文档时：给摘要 + 关键段落，禁止用「无法访问链接」推脱。
+
+【0.3】监听事件收不到？先查这四条
+· 执行方式「需要红石」且没通电 ⇒ 脚本根本没启动，listen 不会注册。要用事件就把执行方式设成「保持运行」。
+· 断电不派发任何事件；只有「保持运行」或已通电时事件才进来。
+· 拿木棍点**别的方块/地面**能收到；点**这个方块自己**时由宿主先接管（开面板），脚本收不到。
+· 要拦掉默认行为（比如别让物品被用掉/方块被放）必须在处理函数里 ret(true)；木棍这种没有默认行为的不写也行。
 
 【0.2】三个最常见的错（几乎每个需求都会踩）
 · spawn_id(类型, 半径)：第二个参数是**半径**，不是数量；在方块周围 ±N 格随机生成。要只生成一只就传小半径。
@@ -245,7 +251,7 @@ int spawn_one() {
 · 只给报错没给代码：先要代码（面板【输出】区旁边有「复制」按钮）。
 · 贴回来的代码可能已经被改过，行号会错位：以报错里的关键字为准查找，行号只作参考。
 【输出要求】只输出脚本；只用列出的接口和语法。</pre>
-<p class="foot">内容指纹 f9626ec5 · 本页无任何外部请求</p>
+<p class="foot">内容指纹 aa8abb0e · 本页无任何外部请求</p>
 <script>document.getElementById('cp').onclick=function(){var t=document.getElementById('spec').textContent,b=this;
 function ok(){b.textContent='已复制';setTimeout(function(){b.textContent='复制全文';},1500);}
 if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(ok,function(){sel();});}else{sel();}
