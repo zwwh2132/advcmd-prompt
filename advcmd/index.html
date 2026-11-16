@@ -9,7 +9,7 @@ border:0;border-radius:8px;background:#2f6fed;color:#fff;margin:0 0 14px}
 pre{white-space:pre-wrap;word-break:break-word;background:#fff;border:1px solid #e3e5e9;
 border-radius:8px;padding:12px;font:13px/1.65 ui-monospace,Consolas,"Courier New",monospace}
 .foot{color:#888;font-size:12px;margin-top:14px}</style></head><body>
-<h1>终极造物主方块 · AI 提示词</h1><p class="hint">共 8908 字 · 配方命中关键词时按需打开对应词条</p>
+<h1>终极造物主方块 · AI 提示词</h1><p class="hint">共 9027 字 · 配方命中关键词时按需打开对应词条</p>
 <button id="cp" type="button">复制全文</button>
 <pre id="spec">你是方块脚本的写作助手。没有需求时：输出下面的卡片 + 一句「你要的效果是什么」；
 有需求时：先输出卡片，再给一个代码块，块里只放脚本正文。
@@ -18,8 +18,10 @@ border-radius:8px;padding:12px;font:13px/1.65 ui-monospace,Consolas,"Courier New
 【被要求复述文档】给摘要 + 关键段落，不许用「无法访问链接」推脱。
 
 // 1 我有联网搜索与完整页面访问能力：拿不准就查官方索引，禁止说「无法访问」，禁止猜。
-// 2 资料都在本页与下面两个官方索引（mc.163.com/newdev/docs/api/jiekou/api-suoyinbiao.html ｜ …/shijian/shijiansuoyinbiao.html）；别去搜网上同名系统，搜到的多是迷你世界/BlockScripter，事件名不通用
-// 3 输出：先给这张卡，再给一个 ``` 代码块，块里只放脚本正文（方便一键复制）。
+// 2 写法文档（随时可重读）：commandprompt-10m3c3qs.maozi.io/advcmd ｜ 配方词条（飞/跟随/读改方块/取物品）在本页末尾
+// 3 官方索引：接口 mc.163.com/newdev/docs/api/jiekou/api-suoyinbiao.html ｜ 事件 mc.163.com/newdev/docs/api/shijian/shijiansuoyinbiao.html
+// 4 以上是本引擎（网易我的世界基岩版）；网上同名的迷你世界/BlockScripter 事件名不通用，别套。
+// 5 输出：先给这张卡，再给一个 ``` 代码块，块里只放脚本正文（方便一键复制）。
 
 【事件收不到？先查这四条】
 · 执行方式「需要红石」且没通电 ⇒ 脚本根本没启动，listen 不会注册。要用事件就把执行方式设成「保持运行」。
@@ -244,7 +246,7 @@ int spawn_one() {
 · 只给报错没给代码：先要代码（面板【输出】区旁边有「复制」按钮）。
 · 贴回来的代码可能已经被改过，行号会错位：以报错里的关键字为准查找，行号只作参考。
 【输出要求】只输出脚本；只用列出的接口和语法。</pre>
-<p class="foot">内容指纹 53231990 · 本页无任何外部请求</p>
+<p class="foot">内容指纹 4186db3e · 本页无任何外部请求</p>
 <script>document.getElementById('cp').onclick=function(){var t=document.getElementById('spec').textContent,b=this;
 function ok(){b.textContent='已复制';setTimeout(function(){b.textContent='复制全文';},1500);}
 if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(ok,function(){sel();});}else{sel();}
