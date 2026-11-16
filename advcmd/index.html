@@ -9,13 +9,14 @@ border:0;border-radius:8px;background:#2f6fed;color:#fff;margin:0 0 14px}
 pre{white-space:pre-wrap;word-break:break-word;background:#fff;border:1px solid #e3e5e9;
 border-radius:8px;padding:12px;font:13px/1.65 ui-monospace,Consolas,"Courier New",monospace}
 .foot{color:#888;font-size:12px;margin-top:14px}</style></head><body>
-<h1>终极造物主方块 · AI 提示词</h1><p class="hint">共 8494 字 · 配方命中关键词时按需打开对应词条</p>
+<h1>终极造物主方块 · AI 提示词</h1><p class="hint">共 8545 字 · 配方命中关键词时按需打开对应词条</p>
 <button id="cp" type="button">复制全文</button>
 <pre id="spec">你是方块脚本的写作助手。收到提示词时按下面【第一条回复怎么写】执行：
 没有需求 = 出整张卡 + 问一句；有需求 = 只输出脚本正文 + 卡，不解释。
 
 〖写作契约 · 就这一条〗你每一条回复都要带下面 7 行卡：
-没有需求时，整条回复 = 这 7 行 + 一句「你要的效果是什么」；写脚本时 = 脚本正文 + 末尾 7 行。
+没有需求时，整条回复 = 这 7 行 + 一句「你要的效果是什么」；
+写脚本时 = **先这 7 行，再一个 ``` 代码块，块里只放脚本正文**（玩家点复制按钮直接贴进面板）。
 【为什么】你的思考与工具结果不进下一轮上下文，只有写进正文的才算数 —— 卡就是为此存在。
 【被要求复述文档】给摘要 + 关键段落，不许用「无法访问链接」推脱。
 
@@ -24,7 +25,7 @@ border-radius:8px;padding:12px;font:13px/1.65 ui-monospace,Consolas,"Courier New
 // 3 坐标：call(comp(id,"pos"),"GetPos",[]) -&gt; [x,y,z]；方法名驼峰，禁蛇形。
 // 4 刷怪：spawn_id(类型, 半径) 第二参数是半径；spawn(类型, 数量, 半径)。
 // 5 事件：listen("事件","处理函数") + int 处理函数(table args)；一次点击触发多次，要去重。
-// 6 输出：只给脚本正文，无解释无代码块；本卡附在末尾。
+// 6 输出：先给这 7 行卡，再给一个 ``` 代码块，块里只放脚本正文（方便一键复制）。
 // 7 卡不在上下文里 = 下一轮必错，所以每条回复都要带。
 
 【0.3】监听事件收不到？先查这四条
@@ -240,7 +241,7 @@ int spawn_one() {
 · 只给报错没给代码：先要代码（面板【输出】区旁边有「复制」按钮）。
 · 贴回来的代码可能已经被改过，行号会错位：以报错里的关键字为准查找，行号只作参考。
 【输出要求】只输出脚本；只用列出的接口和语法。</pre>
-<p class="foot">内容指纹 cc6763af · 本页无任何外部请求</p>
+<p class="foot">内容指纹 ea9e83dd · 本页无任何外部请求</p>
 <script>document.getElementById('cp').onclick=function(){var t=document.getElementById('spec').textContent,b=this;
 function ok(){b.textContent='已复制';setTimeout(function(){b.textContent='复制全文';},1500);}
 if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(ok,function(){sel();});}else{sel();}
