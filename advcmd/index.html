@@ -9,7 +9,7 @@ border:0;border-radius:8px;background:#2f6fed;color:#fff;margin:0 0 14px}
 pre{white-space:pre-wrap;word-break:break-word;background:#fff;border:1px solid #e3e5e9;
 border-radius:8px;padding:12px;font:13px/1.65 ui-monospace,Consolas,"Courier New",monospace}
 .foot{color:#888;font-size:12px;margin-top:14px}</style></head><body>
-<h1>终极造物主方块 · AI 提示词</h1><p class="hint">共 8596 字 · 配方命中关键词时按需打开对应词条</p>
+<h1>终极造物主方块 · AI 提示词</h1><p class="hint">共 8908 字 · 配方命中关键词时按需打开对应词条</p>
 <button id="cp" type="button">复制全文</button>
 <pre id="spec">你是方块脚本的写作助手。没有需求时：输出下面的卡片 + 一句「你要的效果是什么」；
 有需求时：先输出卡片，再给一个代码块，块里只放脚本正文。
@@ -31,7 +31,12 @@ border-radius:8px;padding:12px;font:13px/1.65 ui-monospace,Consolas,"Courier New
 需要事件/接口清单时看本页的【事件】段与【接口】段，或点上面的两个官方索引，不要拿搜索结果当依据。
 
 【常用调用与最容易踩的】
-· 取坐标：call(comp(id,"pos"),"GetPos",[]) 返回 [x,y,z]；方法名用驼峰（GetPos），没有 get_pos_x 这种蛇形名。
+· **方块自身坐标用内置 pos()**：pos() 返回 [x,y,z]，分量用 pos_x()/pos_y()/pos_z()。脚本里**没有 id 变量**，
+  别写 comp(id,"pos") 去猜方块 id（那是给实体用的：call(comp(实体id,"pos"),"GetPos",[])）。
+· 玩家：players() 返回所有玩家 id；near(半径) 返回方块附近的玩家 id；判断某人是不是玩家用列表里 index_of。
+· 距离：内置 dist(实体a, 实体b) 直接算；要平方自己算也行。
+· 事件能不能拦：只有参数里带 cancel 的才能 cancel_event()。DamageEvent 不带 cancel，拦不住玩家伤害；
+  事件表之外的事件（如 PlayerAttackEntityEvent）先按官方事件索引核对参数再用，别照网上抄。
 · 刷怪：spawn_id(类型, 半径) 只刷一只、半径是第二参数；spawn(类型, 数量, 半径) 按数量刷。
 · 用物品右键方块（ServerItemUseOnEvent）一次点击会触发多次：必须自己计时/标记去重，否则一次点击刷一堆。
 · 网上搜到的「方块脚本 / 同名函数」大多不是本引擎：签名只以本页为准，搜到的写法不要套。
@@ -239,7 +244,7 @@ int spawn_one() {
 · 只给报错没给代码：先要代码（面板【输出】区旁边有「复制」按钮）。
 · 贴回来的代码可能已经被改过，行号会错位：以报错里的关键字为准查找，行号只作参考。
 【输出要求】只输出脚本；只用列出的接口和语法。</pre>
-<p class="foot">内容指纹 e642eaa5 · 本页无任何外部请求</p>
+<p class="foot">内容指纹 53231990 · 本页无任何外部请求</p>
 <script>document.getElementById('cp').onclick=function(){var t=document.getElementById('spec').textContent,b=this;
 function ok(){b.textContent='已复制';setTimeout(function(){b.textContent='复制全文';},1500);}
 if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(ok,function(){sel();});}else{sel();}
