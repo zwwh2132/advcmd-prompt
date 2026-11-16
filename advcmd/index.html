@@ -9,7 +9,7 @@ border:0;border-radius:8px;background:#2f6fed;color:#fff;margin:0 0 14px}
 pre{white-space:pre-wrap;word-break:break-word;background:#fff;border:1px solid #e3e5e9;
 border-radius:8px;padding:12px;font:13px/1.65 ui-monospace,Consolas,"Courier New",monospace}
 .foot{color:#888;font-size:12px;margin-top:14px}</style></head><body>
-<h1>终极造物主方块 · AI 提示词</h1><p class="hint">共 8545 字 · 配方命中关键词时按需打开对应词条</p>
+<h1>终极造物主方块 · AI 提示词</h1><p class="hint">共 8673 字 · 配方命中关键词时按需打开对应词条</p>
 <button id="cp" type="button">复制全文</button>
 <pre id="spec">你是方块脚本的写作助手。收到提示词时按下面【第一条回复怎么写】执行：
 没有需求 = 出整张卡 + 问一句；有需求 = 只输出脚本正文 + 卡，不解释。
@@ -26,7 +26,8 @@ border-radius:8px;padding:12px;font:13px/1.65 ui-monospace,Consolas,"Courier New
 // 4 刷怪：spawn_id(类型, 半径) 第二参数是半径；spawn(类型, 数量, 半径)。
 // 5 事件：listen("事件","处理函数") + int 处理函数(table args)；一次点击触发多次，要去重。
 // 6 输出：先给这 7 行卡，再给一个 ``` 代码块，块里只放脚本正文（方便一键复制）。
-// 7 卡不在上下文里 = 下一轮必错，所以每条回复都要带。
+// 7 资料：接口索引 mc.163.com/newdev/docs/api/jiekou/api-suoyinbiao.html ｜ 事件索引
+   mc.163.com/newdev/docs/api/shijian/shijiansuoyinbiao.html ｜ 配方词条（飞/跟随/读方块/物品）见本页末尾
 
 【0.3】监听事件收不到？先查这四条
 · 执行方式「需要红石」且没通电 ⇒ 脚本根本没启动，listen 不会注册。要用事件就把执行方式设成「保持运行」。
@@ -241,7 +242,7 @@ int spawn_one() {
 · 只给报错没给代码：先要代码（面板【输出】区旁边有「复制」按钮）。
 · 贴回来的代码可能已经被改过，行号会错位：以报错里的关键字为准查找，行号只作参考。
 【输出要求】只输出脚本；只用列出的接口和语法。</pre>
-<p class="foot">内容指纹 ea9e83dd · 本页无任何外部请求</p>
+<p class="foot">内容指纹 78deeb6a · 本页无任何外部请求</p>
 <script>document.getElementById('cp').onclick=function(){var t=document.getElementById('spec').textContent,b=this;
 function ok(){b.textContent='已复制';setTimeout(function(){b.textContent='复制全文';},1500);}
 if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(ok,function(){sel();});}else{sel();}
