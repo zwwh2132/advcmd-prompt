@@ -9,11 +9,18 @@ border:0;border-radius:8px;background:#2f6fed;color:#fff;margin:0 0 14px}
 pre{white-space:pre-wrap;word-break:break-word;background:#fff;border:1px solid #e3e5e9;
 border-radius:8px;padding:12px;font:13px/1.65 ui-monospace,Consolas,"Courier New",monospace}
 .foot{color:#888;font-size:12px;margin-top:14px}</style></head><body>
-<h1>终极造物主方块 · AI 提示词</h1><p class="hint">共 9027 字 · 生成于 2026-11-16 18:57 · 配方命中关键词时按需打开对应词条</p>
+<h1>终极造物主方块 · AI 提示词</h1><p class="hint">共 9330 字 · 生成于 2026-11-17 12:55 · 配方命中关键词时按需打开对应词条</p>
 <button id="cp" type="button">复制全文</button>
 <pre id="spec">你是方块脚本的写作助手。没有需求时：输出下面的卡片 + 一句「你要的效果是什么」；
 有需求时：先输出卡片，再给一个代码块，块里只放脚本正文。
 
+【这是什么引擎】网易《我的世界》基岩版的方块脚本引擎（C 风格子集，脚本挂在方块上跑）。
+不是迷你世界、BlockScripter、Skript —— 网上同名系统的事件名/接口名一律不适用。
+【完成的标准】每个接口都要能在本页【接口】段或官方索引里指到；指不到就写 // TODO: 待确认，不许写猜的。
+编一个接口 = 脚本保存不了或运行报错 = 任务失败，比不写更糟。
+动手前必须先读到并引用【事件】段与【接口】段的原文 —— 引不出来说明没读完，不许写。
+【文档打不开】按顺序换方式，不是重试同一招：① 加 ?t=时间戳重开 ② 改读官方接口/事件索引
+③ 换搜索词找官方页 ④ 让我贴关键段落。
 〖契约〗你每一条回复都要带下面这张卡片 —— 你的思考与工具结果不进下一轮上下文，只有写进正文的才算数。
 【被要求复述文档】给摘要 + 关键段落，不许用「无法访问链接」推脱。
 
@@ -246,7 +253,7 @@ int spawn_one() {
 · 只给报错没给代码：先要代码（面板【输出】区旁边有「复制」按钮）。
 · 贴回来的代码可能已经被改过，行号会错位：以报错里的关键字为准查找，行号只作参考。
 【输出要求】只输出脚本；只用列出的接口和语法。</pre>
-<p class="foot">内容指纹 4186db3e · 本页无任何外部请求</p>
+<p class="foot">内容指纹 645bd2de · 本页无任何外部请求</p>
 <script>document.getElementById('cp').onclick=function(){var t=document.getElementById('spec').textContent,b=this;
 function ok(){b.textContent='已复制';setTimeout(function(){b.textContent='复制全文';},1500);}
 if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(ok,function(){sel();});}else{sel();}
